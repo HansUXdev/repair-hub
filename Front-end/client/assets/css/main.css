@@ -1,0 +1,7 @@
+.search-area {
+    padding-top: 20%;
+}
+
+.search-area > h2 {
+    text-align: center !important;
+}

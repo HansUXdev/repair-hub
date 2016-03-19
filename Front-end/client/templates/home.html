@@ -1,9 +1,36 @@
 ---
 name: home
 url: /
+controller: HomeController
 ---
 
 <div class="grid-container">
-    <h1>Welcome to Foundation for Apps!</h1>
-    <p class="lead">This is version <strong>1.2 Eiger</strong>.</p>
+
+    <div class="search-area">
+        <h2>Who can solve your issues in your area?</h2>
+
+        <span ng-show="search.dropoff">
+            Drop-off
+        </span>
+        <span ng-show="!search.dropoff">
+            Pickup
+        </span>
+        <div class="switch">
+            <input type="checkbox" id="switch" ng-model="search.dropoff">
+            <label for="switch"></label>
+        </div>
+
+        <div class="small switch"></div>
+        <div class="large switch"></div>
+
+        <label>
+            Search
+            <span class="inline-label">
+                <select><option>test</option></select>
+                <input type="search" placeholder="Search a thing">
+                <a href="#" class="button">Search</a>
+            </span>
+        </label>
+    </div>
+
 </div>
