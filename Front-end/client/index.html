@@ -11,14 +11,25 @@
         <script src="./assets/js/app.js"></script>
     </head>
     <body>
-        <div class="grid-frame vertical">
-            <div class="grid-content shrink" style="padding: 0;">
-                <ul class="primary condense menu-bar">
-                    <li><a><strong>Foundation for Apps</strong></a></li>
+        <div class="menu-group primary">
+            <div class="menu-group-left">
+
+                <ul class="menu-bar primary">
+                    <li><a href="#">RepairHub</a></li>
                 </ul>
             </div>
-            <div ui-view class="grid-content">
+            <div class="menu-group-right">
+                <ul class="icon-left primary menu-bar">
+                    <li>
+                        <a href="#">My profile</a>
+                    </li>
+                    <li>
+                        <a href="#">Contact us</a>
+                    </li>
+                </ul>
             </div>
         </div>
+
+        <div ui-view class="grid-content"></div>
     </body>
 </html>
