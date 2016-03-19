@@ -99,9 +99,23 @@ gulp.task('javascript', ['uglify:foundation', 'uglify:app'], function(cb) {
 });
 
 
+
+// Starts a test server, which you can view at http://localhost:8079
+gulp.task('server', ['build'], function() {
+  gulp.src('./build')
+    .pipe($.webserver({
+      port: 8079,
+      host: 'localhost',
+      fallback: 'index.html',
+      livereload: true,
+      open: true
+    }))
+  ;
+});
+
 // Builds your entire app once, without starting a server
 gulp.task('build', function(cb) {
-  sequence('clean', ['copy', 'directives', 'sass', 'JavaScript'], 'routes', cb);
+  sequence('clean', ['copy', 'directives', 'sass', 'javascript'], 'routes', cb);
 });
 
 // Default task: builds your app, starts a server, and recompiles assets when they change
