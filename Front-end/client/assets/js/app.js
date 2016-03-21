@@ -9,6 +9,7 @@
     config.$inject = ['$urlRouterProvider', '$locationProvider'];
     HomeController.$inject = ['$scope', '$stateParams', '$state', '$controller'];
 
+
     function config($urlProvider, $locationProvider) {
         $urlProvider.otherwise('/');
 

@@ -4,6 +4,7 @@ var gulp     = require('gulp');
 var rimraf   = require('rimraf');
 var router   = require('front-router');
 var sequence = require('run-sequence');
+var beautify = require('gulp-beautify');
 
 // Check for --production flag
 var isProduction = !!(argv.production);
@@ -16,12 +17,21 @@ gulp.task('routes', function(cb) {
       path: 'build/assets/js/routes.js',
       root: 'client'
     }))
+    .pipe($.beautify({
+          indent_size: 2,
+    }))
     .pipe(gulp.dest('./build/templates'))
   ;
 
   cb();
   // Watch these files for changes and complie when they change
-  gulp.watch(['./client/templates/**/*.html'], ['routes']);
+  gulp.watch(
+    [
+      './client/templates/**/*.html',
+      // './tasks/routes.js'
+    ], 
+    ['routes']
+  );
 });
 
 

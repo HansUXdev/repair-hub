@@ -8,11 +8,14 @@ var sequence = require('run-sequence');
 // Check for --production flag
 var isProduction = !!(argv.production);
 
-var paths = {
+var directives = {
   production: isProduction ? 'bower_components/foundation-apps/js/angular/components/**/*.html' : 'client/components/*.html',
-  directives: [
-    // Foundation Directives
-    'bower_components/foundation-apps/js/angular/components/**/*.html',
+  // Foundation Directives
+  foundation: [
+    'bower_components/foundation-apps/js/angular/components/**/*.html'
+  ],
+  // Firebase Directives
+  firebase: [
     'client/components/*.html',
   ],
 }
@@ -21,7 +24,7 @@ var paths = {
 
 // Compiles the Foundation for Apps directive partials into a single JavaScript file
 gulp.task('directives', function(cb) {
-  gulp.src(paths.directives)
+  gulp.src(directives.foundation)
     .pipe($.ngHtml2js({
       prefix: 'components/',
       moduleName: 'foundation',
@@ -32,6 +35,17 @@ gulp.task('directives', function(cb) {
     .pipe(gulp.dest('./build/assets/js'))
   ;
 
+  gulp.src(directives.firebase)
+    .pipe($.ngHtml2js({
+      prefix: 'components/',
+      moduleName: 'firebase',
+      declareModule: false
+    }))
+    .pipe($.uglify())
+    .pipe($.concat('firebase-templates.js'))
+    .pipe(gulp.dest('./build/assets/js'))
+  ;
+
   // Iconic SVG icons
   gulp.src('./bower_components/foundation-apps/iconic/**/*')
     .pipe(gulp.dest('./build/assets/img/iconic/'))
@@ -39,5 +53,5 @@ gulp.task('directives', function(cb) {
 
   cb();
   // Watch these files for changes and complie when they change
-  gulp.watch([paths.directives], ['directives']);
+  gulp.watch([directives.foundation], ['directives']);
 });
